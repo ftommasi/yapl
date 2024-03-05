@@ -49,11 +49,12 @@ pop :: proc() -> Value{
     return value;
 }
 
-interpret :: proc(chunk : ^Chunk) -> InterpretResult{
-    vm.chunk = chunk;
-    vm.ip = 0; //The book uses a pointer and does pointer arithmetic and deref for speed reasons. for safety we will index with int
-    return run();
-}
+//TODO: What is this supposed to be
+//interpret :: proc(chunk : ^Chunk) -> InterpretResult{
+//    vm.chunk = chunk;
+//    vm.ip = 0; //The book uses a pointer and does pointer arithmetic and deref for speed reasons. for safety we will index with int
+//    return run();
+//}
 
 DEBUG_TRACE_EXECUTION :: false
 
