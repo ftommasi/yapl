@@ -5,7 +5,7 @@ Scanner :: struct{
     start_idx : int, //we are not doing ptr ops
     current : string,
     current_idx : int, //we are not doing ptr ops
-    line  : i64,
+    line  : i32,
 }
 
 TokenType :: enum{
@@ -34,7 +34,7 @@ Token :: struct{
     type : TokenType,
     start : string,
     length : i64,
-    line : i64,
+    line : i32,
 }
 
 scanner : Scanner;
@@ -71,7 +71,7 @@ scan_token :: proc() -> Token {
     }
 
 
-    c := advance();
+    c := _advance();
     
     if is_alpha(u8(c)){
         return identifier();
@@ -232,10 +232,10 @@ skip_whitespace :: proc() {
       case ' ': fallthrough;
       case '\r': fallthrough;
       case '\t':
-        _ = advance();
+        _ = _advance();
       case '\n':
         scanner.line += 1;
-        _ = advance();
+        _ = _advance();
       case:
         return;
     }
@@ -251,7 +251,7 @@ peek_next :: proc() -> u8 {
     return scanner.current[scanner.current_idx];
 }
 
-advance :: proc() -> i64 {
+_advance :: proc() -> i64 {
     scanner.current_idx += 1;
     return i64(scanner.current_idx - 1);
 }

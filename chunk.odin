@@ -11,10 +11,17 @@ ValueArray :: BaseDynArray(Value);
 Chunk :: struct{
 	//code : ^u8, //the book defines code as a uint8_t pointer, but really it the array portion
 	code : [dynamic]u8,
+	code_idx : int,
 	count : i32, 
 	capacity : i32, 
 	constants: ValueArray,
 	lines: [dynamic]i32,
+}
+
+make_chunk :: proc() -> ^Chunk {
+	chunk := new(Chunk);
+	init_chunk(chunk);
+	return chunk
 }
 
 init_value_array :: proc(value_array : ^ValueArray ) {

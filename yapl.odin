@@ -34,9 +34,8 @@ main :: proc(){
     }
 
 	fmt.println("YAPL!\n");
-	chunk : Chunk;
-	init_chunk(&chunk);
-	defer free_chunk(&chunk); //in future use defer perchance
+	chunk := make_chunk();
+	defer free_chunk(chunk); //in future use defer perchance
 
 }
 
@@ -79,7 +78,19 @@ run_file :: proc(path : string){
 
 
 interpret :: proc(code :string) -> InterpretResult {
-    compile(code);
+
+	chunk := make_chunk();
+	defer free_chunk(chunk);
+
+	if !compile(code,chunk) {
+		return .COMPILE_ERROR;
+	}
+
+	vm.chunk = chunk;
+	vm.ip = vm.chunk.code_idx;
+
+	result := run();
+
     return .OK;
 }
 

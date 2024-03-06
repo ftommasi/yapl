@@ -50,7 +50,7 @@ pop :: proc() -> Value{
 }
 
 //TODO: What is this supposed to be
-//interpret :: proc(chunk : ^Chunk) -> InterpretResult{
+//interpret_chunk :: proc(chunk : ^Chunk) -> InterpretResult{
 //    vm.chunk = chunk;
 //    vm.ip = 0; //The book uses a pointer and does pointer arithmetic and deref for speed reasons. for safety we will index with int
 //    return run();
