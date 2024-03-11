@@ -92,3 +92,9 @@ current_chunk :: proc() -> ^Chunk{
 expression :: proc() {
 }
 
+number :: proc() {
+	//how do we make this make sense
+	value := f64(parser.previous.start);
+	emit_constant(value);
+}
+
